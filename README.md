@@ -22,6 +22,8 @@ Esta fase contém somente documentação de produto, domínio e arquitetura. Nã
 - [Arquitetura](docs/architecture/overview.md)
 - [Revisão documental](docs/review/documentation-review.md)
 - [CI/CD](docs/development/ci-cd.md)
+- [TDD](docs/development/tdd.md)
+- [TDD backlog](docs/development/tdd-backlog.md)
 
 ## Premissas verificadas
 

@@ -1,20 +1,22 @@
 # Estratégia de testes
 
+O runner oficial do backend é `jsr-testrunner` 0.1.0, executado como `poetry run testrunner`. Comandos de desenvolvimento e CI não executam `pytest` diretamente. A estratégia RED/GREEN/REFACTOR está em [TDD](development/tdd.md).
+
 ## Unit
 
 Progresso, ciclo/depth, policy de fechamento, mapping de stages, ownership e classificação de erros.
 
 ## Integration
 
-PostgreSQL real/temporário para constraints, `workspace_id`, inbox única, projections, tombstones e transações.
+PostgreSQL real/temporário para constraints, `workspace_id`, inbox única, projections, tombstones e transações, somente quando esses componentes existirem.
 
 ## Contract
 
 Fixtures versionadas de REST/GraphQL/webhooks; validar schemas e permissões contra documentação/ambiente de teste. Não confiar somente em mocks.
 
-## GitHub API
+## Provider APIs
 
-Sandbox repositories e testes gravados/reproduzíveis para Issues, comments, sub-issues, dependencies e Projects. Testes reais são poucos e isolados por credencial segura.
+Fixtures locais e testes gravados/reproduzíveis para GitHub e GitLab. Testes reais são poucos e isolados por credencial segura; nenhuma chamada externa participa da suíte padrão.
 
 ## Webhook
 

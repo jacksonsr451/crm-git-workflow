@@ -1,0 +1,8 @@
+{
+  "id": 123,
+  "full_name": "foo/bar",
+  "name": "bar",
+  "owner": {"login": "foo"},
+  "html_url": "https://github.com/foo/bar",
+  "archived": false
+}

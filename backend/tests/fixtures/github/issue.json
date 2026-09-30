@@ -1,0 +1,13 @@
+{
+  "id": 1000,
+  "number": 10,
+  "repository": {"id": 123, "full_name": "foo/bar"},
+  "title": "Provider contract",
+  "body": "Contract body",
+  "state": "open",
+  "assignees": [],
+  "labels": [],
+  "html_url": "https://github.com/foo/bar/issues/10",
+  "created_at": "2026-09-30T00:00:00Z",
+  "updated_at": "2026-09-30T00:00:00Z"
+}
