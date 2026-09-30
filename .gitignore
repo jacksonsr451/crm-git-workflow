@@ -42,8 +42,8 @@ yarn-error.log*
 pnpm-debug.log*
 
 # IDEs
-.vscode/
 .idea/
+.vscode/
 
 # Operating systems
 .DS_Store

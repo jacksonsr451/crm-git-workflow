@@ -129,4 +129,3 @@ jobs:
 
       - name: Verify tracked project files were not changed
         run: git diff --exit-code -- pyproject.toml poetry.lock
-          PY
