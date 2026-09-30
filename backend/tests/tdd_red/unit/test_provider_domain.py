@@ -1,9 +1,9 @@
 import testrunner
+
 from app.domain.comments.models import Comment, StructuredUpdateType
 from app.domain.identities.models import ExternalIdentity
 from app.domain.providers.models import Provider
 from app.domain.repositories.models import Repository
-
 from app.domain.work_items.models import WorkItem, WorkItemState
 
 
@@ -63,7 +63,7 @@ def test_work_item_keeps_native_state_separate_from_workflow_stage() -> None:
     )
 
     assert item.state is WorkItemState.OPEN
-    assert not hasattr(item, "workflow_stage") or item.workflow_stage is None
+    assert not hasattr(item, "workflow_stage")
 
 
 def test_comment_and_structured_update_are_distinct() -> None:
