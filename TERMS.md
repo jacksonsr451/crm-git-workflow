@@ -10,7 +10,7 @@ These terms are intended to govern access to and use of the future service. The 
 
 ## 2. Description of the Service
 
-The planned service is a management and collaboration layer over GitHub Issues, repositories, Projects, and related GitHub data. It is intended to provide views, workflow, synchronization, activity, and collaboration features without replacing GitHub as the source of truth for native Issue data.
+The planned service is a management and collaboration layer over connected SCM providers, initially GitHub and GitLab, and their repositories/projects, work items, planning data, and related content. It is intended to provide views, workflow, synchronization, activity, and collaboration features without replacing the connected provider as the source of truth for native data.
 
 The service is not currently launched. Features, integrations, limits, pricing, and availability are `TBD` and must not be inferred from this draft.
 
@@ -22,11 +22,11 @@ Eligibility requirements, minimum age, organizational authority, and any geograp
 
 The future service may require an account and authentication through a mechanism to be defined. Users will be responsible for maintaining the confidentiality of credentials and for activity performed through their accounts, subject to applicable law. Account recovery, identity verification, and account closure procedures are `TBD`.
 
-## 5. GitHub Integration
+## 5. Provider Integrations
 
-Use of GitHub integration will require the permissions and authorization granted to the GitHub App and, where applicable, the permissions of the GitHub user. The service must not be treated as having authority to perform an operation that GitHub does not permit.
+Use of an integration will require the permissions and authorization granted to the configured provider connection and, where applicable, the permissions of the external user. The service must not be treated as having authority to perform an operation that the provider does not permit.
 
-Users authorize the service to access or act on GitHub resources only through the scopes and flows presented during the applicable integration. The exact permission list and authorization flow are `TBD`.
+Users authorize the service to access or act on provider resources only through the scopes and flows presented during the applicable integration. The exact permission list and authorization flow are `TBD`.
 
 ## 6. GitHub Organizations and Repositories
 

@@ -4,15 +4,18 @@ Data: 2026-09-30
 
 ## Inconsistências corrigidas
 
+- A autoridade foi generalizada de GitHub para provider conectado, com adapters GitHub e GitLab e identidade externa composta.
+- GitHub Projects e GitLab Issue Boards foram separados do workflow interno e classificados como capabilities específicas.
+
 - `Issue state` e workflow agora são separados; status de board não fecha Issue automaticamente.
 - Dependência, stage `BLOCKED` e texto de comentário foram modelados como conceitos distintos.
 - Structured update não depende de parsing; usa metadata ligada a comment id.
-- Assignee local paralelo foi removido; usuário externo é identidade GitHub projetada.
+- Assignee local paralelo foi removido; usuário externo é identidade do provider projetada.
 - Webhook deixou de ser tratado como garantia; reconciliação e sync status são obrigatórios.
 
 ## Riscos
 
-- **CRITICAL**: API/permissions de Projects e eventos podem variar por plano, Cloud/Server e versão. Mitigação: contract tests e capability discovery antes de habilitar mutation.
+- **CRITICAL**: API/permissões de planejamento e eventos podem variar por provider, plano, Cloud/Server e versão. Mitigação: contract tests e capability discovery antes de habilitar mutation.
 - **HIGH**: concorrência entre Project/GitHub/aplicação pode produzir status intermitente. Mitigação: expected version, confirmação, refetch e conflito.
 - **HIGH**: transferência de Issue/repository altera escopo e identidade operacional. Mitigação: IDs estáveis, tombstones e reconcile explícito.
 - **HIGH**: payload incompleto/fora de ordem pode corromper projection. Mitigação: monotonic checks e refetch.
@@ -46,4 +49,4 @@ IA, chat, vídeo, calendário, Gantt, timesheet, CRM, wiki, editor, microserviç
 
 ## Verificação cruzada
 
-Ownership está alinhado com domain projections e synchronization. Requirements exigem confirmação GitHub, enquanto ADR-001/004 definem eventual consistency. Permissions exige role + GitHub capability. Workflow usa Project field e não labels. Comments usam IDs e metadata local. Nenhuma contradição bloqueante permanece; os itens acima dependem de evidência/decisão de produto.
+Ownership está alinhado com domain projections e synchronization. Requirements exigem confirmação do provider, enquanto ADR-004/006 definem eventual consistency. Permissions exige role + capability externa. Workflow usa binding nativo quando disponível e não labels por padrão. Comments usam identidade externa e metadata local. Nenhuma contradição bloqueante permanece; os itens acima dependem de evidência/decisão de produto.

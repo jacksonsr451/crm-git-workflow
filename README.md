@@ -1,6 +1,6 @@
 # Git Workflow CRM
 
-Camada de gestão de trabalho sobre GitHub Issues. O GitHub continua sendo a fonte de verdade dos dados nativos de uma Issue; esta aplicação fornece contexto, workflow, visualizações, colaboração estruturada, sincronização e projeções locais.
+Camada de gestão de trabalho sobre providers SCM. GitHub e GitLab permanecem fontes de verdade dos respectivos dados nativos; esta aplicação fornece contexto, workflow, visualizações, colaboração estruturada, sincronização e projeções locais.
 
 ## Estado do projeto
 
@@ -15,18 +15,21 @@ Esta fase contém somente documentação de produto, domínio e arquitetura. Nã
 - [Modelo de domínio](docs/domain/domain-model.md)
 - [Ownership dos dados](docs/architecture/source-of-truth.md)
 - [Integração GitHub](docs/architecture/github-integration.md)
+- [Integrações SCM](docs/integrations/overview.md)
+- [Capabilities por provider](docs/integrations/provider-capabilities.md)
+- [Modelo normalizado](docs/integrations/normalized-domain-model.md)
 - [Sincronização](docs/architecture/synchronization.md)
 - [Arquitetura](docs/architecture/overview.md)
 - [Revisão documental](docs/review/documentation-review.md)
 
 ## Premissas verificadas
 
-As decisões dependentes da API estão registradas em [github-integration.md](docs/architecture/github-integration.md), com links para documentação oficial consultada em 2026-09-30. Capacidades do GitHub podem mudar; contratos devem ser revalidados antes de cada implementação.
+As decisões dependentes de API estão registradas na [documentação de integrações](docs/integrations/overview.md), com links para documentação oficial consultada em 2026-09-30. Capabilities podem mudar por provider, plano, versão e permissão; contratos devem ser revalidados antes de cada implementação.
 
 ## Princípios
 
-1. Não criar uma segunda Issue local autoritativa.
-2. Confirmar no GitHub mutações de dados cuja autoridade é do GitHub.
+1. Não criar um segundo work item local autoritativo.
+2. Confirmar no provider mutações de dados cuja autoridade é externa.
 3. Tratar webhooks como atualização rápida, não como garantia de consistência.
 4. Isolar todos os dados por `workspace_id`.
 5. Falha de sincronização deve ser visível e recuperável.

@@ -5,26 +5,26 @@
 | Conceito | Decisão | Identidade | Autoridade |
 |---|---|---|---|
 | Workspace | Tenant e políticas do produto | UUID | Aplicação |
-| User | Identidade local autenticada, ligada opcionalmente a GitHub user | UUID + GitHub node id | Aplicação para sessão; GitHub para perfil externo |
+| User | Identidade local autenticada, ligada opcionalmente a identidade externa | UUID + provider identity | Aplicação para sessão; provider para perfil externo |
 | WorkspaceMember | Associação user/workspace e role | workspace + user | Aplicação |
-| GitHubInstallation | Instalação, conta alvo, permissões e estado | installation id | GitHub para existência/permissões; aplicação para vínculo |
-| Repository | Projeção de repositório autorizado | GitHub repository id | GitHub |
-| IssueProjection | Issue, campos nativos, estado de sync e links | repository id + issue number; node id único | GitHub |
-| IssueRelation | Parent/child, dependency; projeção de relações nativas | relação externa | GitHub |
-| ProjectBinding | Vínculo opcional a GitHub Project e mapeamento de status | Project node id | GitHub para Project; aplicação para seleção |
+| ProviderConnection | Endpoint, autorização, permissões e estado | provider + connection id | Provider para existência/permissões; aplicação para vínculo |
+| Repository | Projeção de repository/project autorizado | provider + external id | Provider |
+| WorkItemProjection | Work item, campos nativos, estado de sync e links | connection id + external id | Provider |
+| ExternalRelation | Parent/child, dependency; projeção de relação nativa | relação externa | Provider |
+| ProviderBinding | Vínculo opcional a capacidade de planejamento e mapeamento de status | provider + external id | Provider para recurso; aplicação para seleção |
 | Workflow | Configuração do workflow consumida pela aplicação | UUID | Aplicação, ou Project quando mapeado |
 | WorkflowStage | Estágio e sua apresentação/mapeamento | workflow + external option id | Project field quando nativo; aplicação somente para apresentação |
-| StructuredUpdate | Metadata de comentário GitHub | github comment id | Aplicação para tipo; GitHub para texto |
+| StructuredUpdate | Metadata de comentário externo | provider + external comment id | Aplicação para tipo; provider para texto |
 | SavedView | Filtro, ordenação e layout | workspace + UUID | Aplicação |
 | Activity | Evento apresentado, com origem | UUID + origem externa | Derivada; não substitui histórico |
-| SyncState | Checkpoint, última sincronização e erro | instalação/repositório/escopo | Aplicação |
-| WebhookDelivery | Inbox idempotente e resultado de processamento | GitHub delivery id | Aplicação, com payload bruto protegido |
+| SyncState | Checkpoint, última sincronização e erro | connection/repository/escopo | Aplicação |
+| WebhookDelivery | Inbox idempotente e resultado de processamento | provider delivery id | Aplicação, com payload bruto protegido |
 | AuditEvent | Auditoria das operações do produto | UUID | Aplicação |
 | Notification | Preferência/entrega interna | UUID | Aplicação |
 
 ## O que não é entidade local
 
-Issue, comentário, assignee, label, parent, dependency e Project não ganham agregados autoritativos locais. São adaptadores e projeções de recursos GitHub. `Organization` é referência da conta GitHub, não tenant; `Repository` não é dono de configuração interna.
+Work item, comentário, assignee, label, parent, dependency e capacidade de planejamento não ganham agregados autoritativos locais. São adaptadores e projeções de recursos externos. `Organization`/`Group` é referência da conta do provider, não tenant; `Repository` não é dono de configuração interna.
 
 ## Invariantes
 
@@ -32,7 +32,7 @@ Issue, comentário, assignee, label, parent, dependency e Project não ganham ag
 - A chave externa de Issue é única por repositório e node id.
 - Uma Issue tem no máximo um parent segundo a relação nativa.
 - Relações pai/filho não podem criar ciclo; profundidade admitida pelo produto não excede a capacidade oficial atual.
-- A projeção nunca confirma uma mutação GitHub antes da resposta bem-sucedida ou webhook equivalente.
+- A projeção nunca confirma uma mutação externa antes da resposta bem-sucedida ou webhook equivalente.
 - Um Project field só é workflow se o binding e o mapeamento forem válidos.
 - Metadata de structured update nunca altera o corpo do comentário.
 - Evento externo repetido não cria nova atividade efetiva nem altera duas vezes a projeção.

@@ -6,7 +6,7 @@ This is a planning draft for a future service. It is not a final privacy notice 
 
 ## 1. Introduction
 
-The planned service will provide a management layer over GitHub data. This draft describes possible categories of information and intended safeguards without asserting that every category will be collected or stored.
+The planned service will provide a management layer over connected SCM providers, initially GitHub and GitLab. This draft describes possible categories of information and intended safeguards without asserting that every category will be collected or stored.
 
 ## 2. Scope
 
@@ -18,22 +18,22 @@ Depending on the feature and authorization, the service may receive or generate 
 
 The service distinguishes:
 
-- **Consulted**: data read from GitHub or another provider during a request or synchronization;
+- **Consulted**: data read from GitHub, GitLab, or another provider during a request or synchronization;
 - **Processed**: data used to authenticate, authorize, display, synchronize, secure, or operate a feature;
 - **Stored**: data persisted in application databases, audit stores, logs, or backups;
 - **Temporary/cache**: data retained temporarily to serve a request, queue work, or improve performance.
 
 Consulting or processing data does not by itself mean that the data is permanently stored.
 
-## 4. Information Received from GitHub
+## 4. Information Received from Connected Providers
 
-Subject to granted permissions and actual feature use, the service may receive GitHub user ID, username, public name, avatar, organizations, repositories, Issues, assignees, comments, labels, Projects, Issue events, repository identifiers, installation details, and access-control information. The final scopes and fields are `TBD`.
+Subject to granted permissions and actual feature use, the service may receive provider user IDs, usernames, public names, avatars, groups/organizations, repositories/projects, work items, assignees, comments/notes, labels, planning data, events, identifiers, connection details, and access-control information. The final scopes and fields are `TBD`.
 
-The service should request minimum permissions and collect only data necessary for the selected functionality. GitHub remains the source of truth for native GitHub data as described in the project architecture.
+The service should request minimum permissions and collect only data necessary for the selected functionality. Each connected provider remains the source of truth for its native data as described in the project architecture.
 
 ## 5. Authentication Information
 
-Authentication may involve OAuth or GitHub App authorization data, session identifiers, installation identifiers, short-lived tokens, and security logs. Secrets and private keys should not be exposed to users or stored unnecessarily. The exact authentication provider, token storage, and session design are `TBD`.
+Authentication may involve OAuth, GitHub App or GitLab application authorization data, session identifiers, connection identifiers, short-lived tokens, and security logs. Secrets and private keys should not be exposed to users or stored unnecessarily. The exact authentication provider, token storage, and session design are `TBD`.
 
 ## 6. Information We Do Not Intend to Collect
 
@@ -41,7 +41,7 @@ The project does not intend to collect passwords from GitHub users, GitHub perso
 
 ## 7. Purpose of Processing
 
-Possible purposes include authentication, workspace authorization, displaying and filtering work, synchronizing GitHub data, executing user-requested GitHub actions, preventing abuse, debugging, security monitoring, auditing, service improvement, and complying with legal obligations. Purposes must be limited and documented before launch.
+Possible purposes include authentication, workspace authorization, displaying and filtering work, synchronizing provider data, executing user-requested provider actions, preventing abuse, debugging, security monitoring, auditing, service improvement, and complying with legal obligations. Purposes must be limited and documented before launch.
 
 ## 8. Legal Basis
 

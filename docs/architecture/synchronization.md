@@ -36,7 +36,7 @@ sequenceDiagram
   participant G as GitHub API
   participant P as Projection
   F->>B: command + expected version
-  B->>B: authorize workspace + GitHub capability
+  B->>B: authorize workspace + provider capability
   B->>G: mutation
   G-->>B: confirmed resource
   B->>P: upsert confirmed state

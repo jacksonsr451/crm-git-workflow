@@ -2,6 +2,6 @@
 
 Status: Accepted
 
-Decisão: webhook atualiza rapidamente; API reconcilia e corrige. Mutations só confirmam após GitHub.
+Decisão: webhook atualiza rapidamente; API do provider reconcilia e corrige. Mutations só confirmam após o provider.
 
-Motivo: webhooks podem atrasar, duplicar ou falhar. Consequência: sync status e conflitos são produto, não detalhe invisível.
+Motivo: webhooks podem atrasar, duplicar ou falhar em qualquer provider. Consequência: sync status e conflitos são produto, não detalhe invisível.

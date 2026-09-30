@@ -1,5 +1,7 @@
 # Integração GitHub
 
+Este documento descreve apenas o adapter GitHub. O contrato comum, o modelo normalizado e a comparação com GitLab estão em [docs/integrations](../integrations/overview.md).
+
 ## Evidências oficiais consultadas em 2026-09-30
 
 - [Sub-issues REST](https://docs.github.com/en/rest/issues/sub-issues): listar, parent, adicionar, remover e repriorizar; a página de produto documenta até 100 filhos por parent e até oito níveis.
