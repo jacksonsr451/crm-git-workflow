@@ -1,0 +1,52 @@
+[project]
+name = "crm-git-workflow-backend"
+version = "0.1.0"
+description = "FastAPI backend for the Git Workflow CRM"
+authors = [{ name = "Jackson Severino da Rocha" }]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "fastapi>=0.115,<1.0",
+    "uvicorn[standard]>=0.34,<1.0",
+]
+
+[project.scripts]
+serve = "app.main:run"
+
+[tool.poetry]
+packages = [{ include = "app", from = "src" }]
+
+[tool.poetry.group.dev.dependencies]
+httpx = ">=0.28,<1.0"
+ruff = ">=0.9,<1.0"
+mypy = ">=1.14,<2.0"
+jsr-testrunner = "0.1.0"
+py = ">=1.11,<2.0"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.testrunner]
+testpaths = ["tests/unit", "tests/api"]
+pythonpath = ["src"]
+python_files = ["test_*.py", "*_test.py"]
+python_functions = ["test*"]
+norecursedirs = [".git", ".venv", ".testrunner_cache"]
+addopts = ["--disable-plugin-autoload", "-ra"]
+strict = true
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src"
+packages = ["app"]
+strict = true
+warn_unused_configs = true
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

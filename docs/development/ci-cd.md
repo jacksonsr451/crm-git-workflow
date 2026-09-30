@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-O repositório está em estado documentation-only. Não existem `pyproject.toml`, `poetry.lock`, `package.json`, `pnpm-lock.yaml`, código Python/TypeScript, testes, Dockerfile, migrations ou scripts de build. Por isso, os únicos gates ativos validam documentação e secrets reais no histórico/checkout.
+O repositório possui documentação e um backend Python inicial. Não existem frontend Node/Next.js, `package.json`, `pnpm-lock.yaml`, Dockerfile, migrations ou scripts de build. Por isso, os gates ativos validam documentação, backend e secrets reais no histórico/checkout.
 
 ## Workflows ativos
 
@@ -12,7 +12,14 @@ O repositório está em estado documentation-only. Não existem `pyproject.toml`
 - Check: `CI / docs`.
 - Valida arquivos obrigatórios, trailing whitespace, links locais Markdown e fechamento de blocos Mermaid.
 - Permissão: `contents: read`.
-- Não executa backend, frontend ou build inexistente.
+
+### `CI / backend`
+
+- Trigger: os mesmos eventos de `CI`.
+- Executa em Python 3.11 com Poetry 2.4.0.
+- Valida `poetry.lock`, instala dependências sem atualizar o lockfile e executa Ruff, formatter, mypy e `poetry run testrunner` na suíte estável.
+- Confirma que `pyproject.toml` e `poetry.lock` não foram modificados durante o job.
+- Permissão: `contents: read`.
 
 ### `Security`
 
@@ -31,15 +38,16 @@ O repositório está em estado documentation-only. Não existem `pyproject.toml`
 Quando a proteção de branch for configurada remotamente, tornar obrigatórios:
 
 - `CI / docs`
+- `CI / backend`
 - `Security / secrets`
 
 Exigir o nome exato e estável do check. Não há configuração remota de branch protection nesta tarefa.
 
 ## Ativação progressiva
 
-### Backend: `PREPARED`
+### Backend: `ACTIVE`
 
-Ativar quando existirem `pyproject.toml`, `poetry.lock`, pacote Python e testes pytest. O job deverá detectar a versão oficial em `pyproject.toml` ou `.python-version`, instalar Poetry em versão fixada, usar `poetry install` sem atualizar lockfile e executar somente Ruff, mypy e pytest configurados. PostgreSQL só entra como service container quando um teste de integração realmente depender dele. Alembic só será verificado quando existir.
+O backend inicial já possui `pyproject.toml`, `poetry.lock`, pacote Python e testes executáveis via `jsr-testrunner`. O job usa Python 3.11, conforme a configuração atual. PostgreSQL só entra como service container quando um teste de integração realmente depender dele. Alembic só será verificado quando existir.
 
 ### Frontend: `PREPARED`
 
@@ -77,6 +85,7 @@ Não há cloud provider, registry, staging ou production definidos. Não existe 
 ## Falhas
 
 - Falha de documentação bloqueia `CI / docs`.
+- Falha de lint, formatter, typecheck ou teste bloqueia `CI / backend`.
 - Secret detectado bloqueia `Security / secrets` e deve ser removido/revogado, não apenas ocultado.
 - Falhas futuras de lint, typecheck, teste, dependência, CodeQL, build ou scan devem falhar o job correspondente sem `continue-on-error`.
 - Release não deve iniciar sem os gates aplicáveis concluídos.
@@ -84,7 +93,7 @@ Não há cloud provider, registry, staging ou production definidos. Não existe 
 
 ## Equivalentes locais
 
-O check documental pode ser reproduzido executando o mesmo bloco Python do workflow em uma máquina com Python 3. O secret scan pode ser reproduzido com uma versão fixada do Gitleaks instalada localmente. Os jobs futuros devem expor comandos Poetry/pnpm que também possam ser executados localmente.
+O check documental pode ser reproduzido executando o mesmo bloco Python do workflow em uma máquina com Python 3. O backend pode ser validado em `backend/` com `poetry check --lock`, `poetry run ruff check .`, `poetry run ruff format --check .`, `poetry run mypy src` e `poetry run testrunner`. O secret scan pode ser reproduzido com uma versão fixada do Gitleaks instalada localmente. Jobs futuros de frontend devem expor comandos pnpm equivalentes.
 
 ## Branches e merge
 
