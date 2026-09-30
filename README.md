@@ -21,6 +21,7 @@ Esta fase contém somente documentação de produto, domínio e arquitetura. Nã
 - [Sincronização](docs/architecture/synchronization.md)
 - [Arquitetura](docs/architecture/overview.md)
 - [Revisão documental](docs/review/documentation-review.md)
+- [CI/CD](docs/development/ci-cd.md)
 
 ## Premissas verificadas
 
