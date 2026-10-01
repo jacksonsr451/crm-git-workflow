@@ -6,3 +6,4 @@ class CapabilityStatus(Enum):
 
     SUPPORTED = "supported"
     UNSUPPORTED = "unsupported"
+    PARTIAL = "partial"

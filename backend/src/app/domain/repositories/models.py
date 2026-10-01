@@ -17,3 +17,10 @@ class Repository:
         self.name = name
         self.external_url = external_url
         self.archived = archived
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Repository):
+            return NotImplemented
+        return (self.provider, self.external_id) == (other.provider, other.external_id)
+
+    __hash__ = None  # type: ignore[assignment]
