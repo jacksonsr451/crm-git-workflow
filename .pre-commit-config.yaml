@@ -1,0 +1,44 @@
+minimum_pre_commit_version: "3.0.0"
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=500]
+
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: Ruff lint
+        entry: poetry -C backend run ruff check .
+        language: system
+        pass_filenames: false
+        files: ^backend/.*\.py$
+
+      - id: ruff-format
+        name: Ruff format check
+        entry: poetry -C backend run ruff format --check .
+        language: system
+        pass_filenames: false
+        files: ^backend/.*\.py$
+
+      - id: mypy
+        name: mypy
+        entry: poetry -C backend run mypy src
+        language: system
+        pass_filenames: false
+        files: ^backend/.*\.py$
+
+      - id: stable-tests
+        name: Stable tests
+        entry: poetry -C backend run testrunner
+        language: system
+        pass_filenames: false
+        files: ^backend/(src|tests)/.*\.py$

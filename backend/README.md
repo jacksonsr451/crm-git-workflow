@@ -19,6 +19,10 @@ poetry run ruff format --check .
 poetry run mypy src
 poetry run testrunner
 
+# Instalar e executar os hooks (a partir de backend/)
+poetry run pre-commit install
+poetry run pre-commit run --all-files
+
 # Próxima especificação TDD, intencionalmente RED
 poetry run testrunner tests/tdd_red
 ```

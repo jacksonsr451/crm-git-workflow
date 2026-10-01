@@ -22,6 +22,7 @@ ruff = ">=0.9,<1.0"
 mypy = ">=1.14,<2.0"
 jsr-testrunner = "0.1.0"
 py = ">=1.11,<2.0"
+pre-commit = ">=4.0,<5.0"
 
 [tool.ruff]
 line-length = 100
