@@ -1,5 +1,9 @@
 from pathlib import Path
 
+from app.domain.comments.models import Comment
+from app.domain.identities.models import ExternalIdentity
+from app.domain.repositories.models import Repository
+from app.domain.work_items.models import WorkItem
 from app.infrastructure.providers.github.normalizer import (
     normalize_comment as normalize_github_comment,
 )
@@ -24,11 +28,6 @@ from app.infrastructure.providers.gitlab.normalizer import (
 from app.infrastructure.providers.gitlab.normalizer import (
     normalize_work_item as normalize_gitlab_work_item,
 )
-
-from app.domain.comments.models import Comment
-from app.domain.identities.models import ExternalIdentity
-from app.domain.repositories.models import Repository
-from app.domain.work_items.models import WorkItem
 
 FIXTURES = Path(__file__).parents[2] / "fixtures"
 
