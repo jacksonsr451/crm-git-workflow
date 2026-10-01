@@ -1,5 +1,7 @@
 from collections.abc import Sequence
 
+import testrunner
+
 from app.application.use_cases.list_work_items import list_work_items
 from app.domain.errors import ProviderUnavailableError
 from app.domain.providers.models import Provider
@@ -45,12 +47,29 @@ def test_list_work_items_propagates_provider_error() -> None:
     error = ProviderUnavailableError("provider unavailable")
     provider = FakeWorkItemProvider(error=error)
 
-    try:
+    with testrunner.raises(ProviderUnavailableError):
         list_work_items(provider, "repo-1")
-    except ProviderUnavailableError as raised_error:
-        assert raised_error is error
-    else:
-        raise AssertionError("provider error was not propagated")
+
+
+def test_list_work_items_accepts_normalized_item_from_any_provider() -> None:
+    item = WorkItem(
+        provider=Provider.GITLAB,
+        external_id="789:10",
+        external_number=10,
+        repository_id="456",
+        title="Issue",
+        description="Description",
+        state=WorkItemState.OPEN,
+        assignees=(),
+        labels=(),
+        external_url="https://gitlab.com/foo/bar/-/issues/10",
+    )
+    provider = FakeWorkItemProvider(result=(item,))
+
+    result = list_work_items(provider, "456")
+
+    assert result == (item,)
+    assert provider.repository_ids == ["456"]
 
 
 def _work_item(external_id: str, external_number: int) -> WorkItem:

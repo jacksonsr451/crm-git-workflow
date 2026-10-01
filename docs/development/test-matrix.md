@@ -15,5 +15,7 @@
 | `BR-WORKFLOW-006` | `FR-WORKFLOW-002` | Backlog: dependency/blocker separation |
 | `BR-SYNC-001` | `FR-SYNC-001` | Backlog: webhook idempotency |
 | `BR-AUTH-001` | `FR-AUTHZ-001` | Backlog: provider permission mapping |
+| `BR-WORKITEM-001` | `FR-ISSUE-001` | `test_provider_normalizers` |
+| `N/A` | `FR-ISSUE-001` | `test_list_work_items` |
 
 `FR-ISSUE-*` and `FR-GITHUB-*` são IDs legados existentes; não foram renomeados silenciosamente. A generalização para GitLab aguarda decisão documental.
