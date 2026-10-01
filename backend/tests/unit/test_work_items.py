@@ -9,7 +9,7 @@ def test_work_item_is_provider_neutral() -> None:
         external_number=1,
         repository_id="repo-1",
         title="First issue",
-        description=None,
+        description="",
         state=WorkItemState.OPEN,
         assignees=(),
         labels=(),
