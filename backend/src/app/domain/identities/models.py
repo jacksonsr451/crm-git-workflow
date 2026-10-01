@@ -6,3 +6,10 @@ class ExternalIdentity:
         self.provider = provider
         self.external_id = external_id
         self.username = username
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, ExternalIdentity):
+            return NotImplemented
+        return (self.provider, self.external_id) == (other.provider, other.external_id)
+
+    __hash__ = None  # type: ignore[assignment]
